@@ -3,7 +3,7 @@ import FileUploader from "../components/FileUploader";
 import UnfollowersList from "../components/UnfollowersList";
 import { extractUnfollowers } from "../utils/jsonParser";
 import { motion } from "framer-motion";
-import "../styles/home.css";
+import "../styles/Home.css";
 
 interface StringListData {
   href: string;
