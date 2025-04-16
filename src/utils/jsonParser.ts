@@ -1,4 +1,7 @@
-// File utils/jsonParser.ts yang seharusnya:
+interface UnfollowerInfo {
+  username: string;
+  profileUrl: string;
+}
 
 export function extractUnfollowers({
   followers,
@@ -6,8 +9,7 @@ export function extractUnfollowers({
 }: {
   followers: any[];
   relationships_following: any[];
-}): string[] {
-  // Log untuk debugging
+}): UnfollowerInfo[] {
   console.log("Extracting unfollowers...");
   console.log("Followers:", followers.length);
   console.log("Following:", relationships_following.length);
@@ -17,7 +19,6 @@ export function extractUnfollowers({
     const followerUsernames = new Set(
       followers
         .map((entry) => {
-          // Pastikan data struktur sesuai
           if (entry.string_list_data && entry.string_list_data[0]) {
             return entry.string_list_data[0].value;
           }
@@ -28,16 +29,23 @@ export function extractUnfollowers({
 
     console.log("Follower usernames count:", followerUsernames.size);
 
-    // Mengambil username dari following dan filter yang tidak follow balik
+    // Untuk setiap following, periksa jika mereka tidak ada di followers
     const unfollowers = relationships_following
       .map((entry) => {
         if (entry.string_list_data && entry.string_list_data[0]) {
-          return entry.string_list_data[0].value;
+          const username = entry.string_list_data[0].value;
+          const profileUrl =
+            entry.string_list_data[0].href ||
+            `https://instagram.com/${username}`;
+
+          // Jika username tidak ditemukan di followers, anggap mereka unfollower
+          if (!followerUsernames.has(username)) {
+            return { username, profileUrl };
+          }
         }
         return null;
       })
-      .filter(Boolean)
-      .filter((username) => !followerUsernames.has(username));
+      .filter(Boolean);
 
     console.log("Unfollower count:", unfollowers.length);
     console.log("Sample unfollowers:", unfollowers.slice(0, 5));

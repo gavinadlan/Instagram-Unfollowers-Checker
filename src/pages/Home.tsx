@@ -15,10 +15,15 @@ interface Entry {
   string_list_data: StringListData[];
 }
 
+interface UnfollowerInfo {
+  username: string;
+  profileUrl: string;
+}
+
 export default function Home() {
   const [followers, setFollowers] = useState<Entry[]>([]);
   const [following, setFollowing] = useState<Entry[]>([]);
-  const [unfollowers, setUnfollowers] = useState<string[]>([]);
+  const [unfollowers, setUnfollowers] = useState<UnfollowerInfo[]>([]);
 
   const handleProcess = () => {
     console.log("Processing data...");

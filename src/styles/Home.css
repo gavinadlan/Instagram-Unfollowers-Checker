@@ -121,6 +121,18 @@ input[type="file"] {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Di home.css */
+.unfollower-link {
+  color: #3498db;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.unfollower-link:hover {
+  color: #2980b9;
+  text-decoration: underline;
+}
+
 /* No Unfollowers Text */
 .no-unfollowers {
   font-size: 1.2rem;
