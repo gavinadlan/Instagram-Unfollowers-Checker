@@ -1,0 +1,131 @@
+/* Background dan Container */
+body {
+  background: linear-gradient(to right, #4c6ef5, #9b59b6, #f88379);
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Heading */
+h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+/* Paragraph */
+p {
+  font-size: 1.2rem;
+  color: white;
+  max-width: 600px;
+  margin: 0 auto 2rem auto;
+  line-height: 1.6;
+}
+
+/* Card Styling */
+.card {
+  width: 100%;
+  max-width: 800px;
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin-top: 3rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Button Styling */
+button {
+  background-color: #9b59b6;
+  color: white;
+  font-weight: 600;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+button:hover {
+  background-color: #8e44ad;
+  transform: scale(1.05);
+}
+
+/* Upload Area */
+.upload-container {
+  margin: 2rem 0;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.upload-btn-wrapper {
+  display: inline-block;
+  position: relative;
+}
+
+.upload-btn-wrapper button {
+  background-color: #f88379;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.upload-btn-wrapper button:hover {
+  background-color: #eb4b47;
+  transform: scale(1.05);
+}
+
+/* Unfollowers List */
+.unfollowers-list {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 2rem;
+}
+
+.unfollowers-list li {
+  background: #f9f9f9;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.unfollowers-list li:hover {
+  background-color: #f1f1f1;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling untuk pesan No Unfollowers */
+.no-unfollowers {
+  font-size: 1.2rem;
+  color: #555;
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 2rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+/* Efek hover ketika card di-hover */
+.no-unfollowers:hover {
+  background-color: #f1f1f1;
+}

@@ -1,41 +1,50 @@
-import { useState, ChangeEvent } from "react";
+import React, { useRef } from "react";
 
 interface FileUploaderProps {
-  onJSONParsed: (data: any) => void;
+  onJSONParsed: (json: any) => void;
 }
 
-export default function FileUploader({ onJSONParsed }: FileUploaderProps) {
-  const [error, setError] = useState("");
+const FileUploader: React.FC<FileUploaderProps> = ({ onJSONParsed }) => {
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
 
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      try {
-        const result = event.target?.result;
-        if (typeof result === "string") {
-          const data = JSON.parse(result);
-          onJSONParsed(data);
-          setError("");
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const fileContent = reader.result as string;
+        try {
+          const json = JSON.parse(fileContent);
+          onJSONParsed(json); // Parse JSON dan kirim ke parent
+        } catch (error) {
+          alert("Gagal mem-parsing file. Pastikan itu file JSON yang valid.");
         }
-      } catch {
-        setError("File tidak valid atau bukan JSON.");
-      }
-    };
-    reader.readAsText(file);
+      };
+      reader.readAsText(file);
+    }
+  };
+
+  const triggerFileInput = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
   };
 
   return (
-    <div className="space-y-2">
+    <div className="upload-container">
       <input
+        ref={fileInputRef}
         type="file"
         accept=".json"
-        onChange={handleFileChange}
-        className="block w-full text-sm file:bg-blue-600 file:text-white file:px-4 file:py-2 file:rounded"
+        onChange={handleFileUpload}
+        style={{ display: "none" }} // Menyembunyikan input file
       />
-      {error && <p className="text-red-500 text-sm">{error}</p>}
+      <button className="upload-btn" onClick={triggerFileInput}>
+        Upload JSON File
+      </button>
     </div>
   );
-}
+};
+
+export default FileUploader;

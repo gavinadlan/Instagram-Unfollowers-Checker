@@ -2,6 +2,8 @@ import { useState } from "react";
 import FileUploader from "../components/FileUploader";
 import UnfollowersList from "../components/UnfollowersList";
 import { extractUnfollowers } from "../utils/jsonParser";
+import { motion } from "framer-motion";
+import "../styles/home.css"; // Import CSS
 
 export default function Home() {
   const [unfollowers, setUnfollowers] = useState<string[]>([]);
@@ -12,14 +14,42 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center flex-col p-6 bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-white">
-      <h1 className="text-3xl font-bold mb-4">Instagram Unfollowers Checker</h1>
-      <p className="mb-6 text-sm text-center text-gray-600 dark:text-gray-300">
-        Upload file JSON dari Instagram (followers & following) dan lihat siapa
-        yang unfollow kamu.
-      </p>
+    <main className="home-container">
+      <motion.h1
+        className="title"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        Instagram Unfollowers Checker
+      </motion.h1>
+      <motion.p
+        className="description"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.2 }}
+      >
+        Upload your Instagram followers & following JSON file to check who
+        unfollowed you. Simple & Fast!
+      </motion.p>
+
       <FileUploader onJSONParsed={handleJSONParsed} />
-      <UnfollowersList unfollowers={unfollowers} />
+
+      <motion.div
+        className="card"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5 }}
+      >
+        {unfollowers.length > 0 && (
+          <UnfollowersList unfollowers={unfollowers} />
+        )}
+        {unfollowers.length === 0 && (
+          <p className="no-unfollowers">
+            No unfollowers found yet! Upload your file to get started.
+          </p>
+        )}
+      </motion.div>
     </main>
   );
 }
