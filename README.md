@@ -1,54 +1,37 @@
-# React + TypeScript + Vite
+# Instagram Unfollowers Checker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple web application to check who unfollowed you on Instagram. The app compares your followers and following lists (provided as JSON files) and displays the users who have unfollowed you.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Upload Followers and Following JSON Files**: Upload your Instagram followers and following JSON files.
+- **Compare and Extract Unfollowers**: The app compares the followers and following lists to find out who unfollowed you.
+- **Display Unfollowers**: Displays the list of users who unfollowed you along with their profile links.
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Frontend**:
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+  - React.js
+  - TypeScript
+  - Framer Motion for animations
+  - Tailwind CSS for styling
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **Backend**:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+  - None (Only client-side processing)
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- **Libraries**:
+  - React File Upload
+  - Framer Motion (for animations)
+  - Tailwind CSS (for styling)
+
+## Installation
+
+Follow these steps to run the project locally:
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/gavinadlan/Instagram-Unfollowers-Checker.git
+   ```
