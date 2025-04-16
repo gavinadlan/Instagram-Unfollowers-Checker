@@ -45,7 +45,7 @@ export function extractUnfollowers({
         }
         return null;
       })
-      .filter(Boolean);
+      .filter((item): item is UnfollowerInfo => item !== null); // Tipe guard untuk TypeScript
 
     console.log("Unfollower count:", unfollowers.length);
     console.log("Sample unfollowers:", unfollowers.slice(0, 5));
