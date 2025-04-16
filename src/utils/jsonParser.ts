@@ -1,23 +1,50 @@
-interface Entry {
-  string_list_data: { value: string }[];
-}
+// File utils/jsonParser.ts yang seharusnya:
 
-interface InstagramData {
-  relationships_following: Entry[];
-  followers: Entry[];
-}
+export function extractUnfollowers({
+  followers,
+  relationships_following,
+}: {
+  followers: any[];
+  relationships_following: any[];
+}): string[] {
+  // Log untuk debugging
+  console.log("Extracting unfollowers...");
+  console.log("Followers:", followers.length);
+  console.log("Following:", relationships_following.length);
 
-export function extractUnfollowers(data: InstagramData): string[] {
   try {
-    const following = data.relationships_following.map(
-      (entry) => entry.string_list_data[0].value
-    );
-    const followers = data.followers.map(
-      (entry) => entry.string_list_data[0].value
+    // Mengambil username dari followers
+    const followerUsernames = new Set(
+      followers
+        .map((entry) => {
+          // Pastikan data struktur sesuai
+          if (entry.string_list_data && entry.string_list_data[0]) {
+            return entry.string_list_data[0].value;
+          }
+          return null;
+        })
+        .filter(Boolean)
     );
 
-    return following.filter((user) => !followers.includes(user));
-  } catch {
+    console.log("Follower usernames count:", followerUsernames.size);
+
+    // Mengambil username dari following dan filter yang tidak follow balik
+    const unfollowers = relationships_following
+      .map((entry) => {
+        if (entry.string_list_data && entry.string_list_data[0]) {
+          return entry.string_list_data[0].value;
+        }
+        return null;
+      })
+      .filter(Boolean)
+      .filter((username) => !followerUsernames.has(username));
+
+    console.log("Unfollower count:", unfollowers.length);
+    console.log("Sample unfollowers:", unfollowers.slice(0, 5));
+
+    return unfollowers;
+  } catch (error) {
+    console.error("Error extracting unfollowers:", error);
     return [];
   }
 }
